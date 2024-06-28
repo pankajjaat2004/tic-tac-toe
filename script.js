@@ -1,4 +1,6 @@
 window.addEventListener('load',events);
+var gameover = new Audio('gameover.mp3');
+var clicking = new Audio('tap.mp3');
 var btns =document.getElementsByTagName('button');
 function events(){
 //console.log(btns);
@@ -39,17 +41,6 @@ function settime(){
         }, 5000);
 }
 
-
-/*
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-    
-function reset(){
-    //sleep(5000).then(() => {location.reload();});
-}
-*/
-
 function reset(){  
     clearInterval(interval);
     countdown=5;
@@ -62,16 +53,18 @@ function isgameover(){
             if(btns[winCondition[j][0]].innerText.trim()==btns[winCondition[j][1]].innerText.trim() && btns[winCondition[j][0]].innerText.trim()==btns[winCondition[j][2]].innerText.trim()){
                 winner=btns[winCondition[j][0]].innerText.trim();
                 document.body.innerHTML=`<h1> Player ${winner} win. New Game Start in ${countdown} seconds.</h1>`;
+                gameover.play();
                 settime();
                 //reset();
             }
         }
-    }[]
+    }
 }
 
 var count = 0;
 var flag=true;
 function show(){
+    clicking.play();
     if(this.innerText.trim().length==0){
         var btnvalue = flag?'X':'0';
         this.innerText =btnvalue;
